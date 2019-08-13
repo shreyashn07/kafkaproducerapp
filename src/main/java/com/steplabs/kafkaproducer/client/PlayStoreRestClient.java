@@ -74,10 +74,10 @@ public class PlayStoreRestClient {
     public List<Review> getNextReviews() throws HttpException,IOException,GeneralSecurityException{
         if(nextPageToken=="1")init();
         List<Review> result=new ArrayList<>();
-        //while(nextPageToken!= null) {
+        while(nextPageToken!= null) {
 
-        result = reviewApi(packageName,pageSize,applicationName).getReviewList();
-        //}
+        result.addAll(reviewApi(packageName,pageSize,applicationName).getReviewList());
+        }
         return result;
 
 
@@ -102,7 +102,10 @@ public class PlayStoreRestClient {
             throw new HttpException(ex.getMessage()); }
         if(jsonResponse.getStatus()==200){
             JSONObject body = jsonResponse.getBody().getObject();
+            if(!(body.isNull("tokenPagination")))
             nextPageToken=body.getJSONObject("tokenPagination").getString("nextPageToken");
+            else
+                nextPageToken=null;
             System.out.println(body.getJSONArray("reviews").length());
             List<Review> reviews= this.parseResults(body.getJSONArray("reviews"));
 
@@ -158,8 +161,8 @@ public class PlayStoreRestClient {
     public Device jsonToDevice(JSONObject reviewJson){
         Device.Builder deviceBuilder=Device.newBuilder();
         deviceBuilder.setProductName(reviewJson.getJSONArray("comments").getJSONObject(0).getJSONObject("userComment").getJSONObject("deviceMetadata").getString("productName"));
-        deviceBuilder.setManufacturer(reviewJson.getJSONArray("comments").getJSONObject(0).getJSONObject("userComment").getJSONObject("deviceMetadata").getString("manufacturer"));
-        deviceBuilder.setRamMb(reviewJson.getJSONArray("comments").getJSONObject(0).getJSONObject("userComment").getJSONObject("deviceMetadata").getLong("ramMb"));
+        deviceBuilder.setManufacturer(reviewJson.getJSONArray("comments").getJSONObject(0).getJSONObject("userComment").getJSONObject("deviceMetadata").isNull("manufacturer")?"some":reviewJson.getJSONArray("comments").getJSONObject(0).getJSONObject("userComment").getJSONObject("deviceMetadata").getString("manufacturer"));
+        deviceBuilder.setRamMb(reviewJson.getJSONArray("comments").getJSONObject(0).getJSONObject("userComment").getJSONObject("deviceMetadata").isNull("ramMb")?1000:reviewJson.getJSONArray("comments").getJSONObject(0).getJSONObject("userComment").getJSONObject("deviceMetadata").getLong("ramMb"));
         return deviceBuilder.build();
 
 
