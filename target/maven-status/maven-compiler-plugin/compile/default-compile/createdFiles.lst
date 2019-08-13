@@ -1,0 +1,16 @@
+com/steplabs/kafkaproducer/ReviewsProducerMain.class
+com/steplabs/kafkaproducer/avro/User.class
+com/steplabs/kafkaproducer/runnable/ReviewsProducerThread.class
+com/steplabs/kafkaproducer/avro/Review.class
+com/steplabs/kafkaproducer/avro/Review$1.class
+com/steplabs/kafkaproducer/avro/User$Builder.class
+com/steplabs/kafkaproducer/avro/Device$1.class
+com/steplabs/kafkaproducer/avro/Device.class
+com/steplabs/kafkaproducer/model/ReviewApiResponse.class
+com/steplabs/kafkaproducer/avro/Device$Builder.class
+com/steplabs/kafkaproducer/avro/User$1.class
+com/steplabs/kafkaproducer/avro/Review$Builder.class
+com/steplabs/kafkaproducer/runnable/ReviewsFetcherThread.class
+com/steplabs/kafkaproducer/client/PlayStoreRestClient.class
+com/steplabs/kafkaproducer/utils/PlayStorePublisherUtils.class
+com/steplabs/kafkaproducer/AppConfig.class

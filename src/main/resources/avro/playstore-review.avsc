@@ -1,0 +1,36 @@
+[
+
+{"namespace":"com.steplabs.kafkaproducer.avro",
+  "type":"record",
+  "name":"User",
+  "fields":[
+    {"name":"name","type":["null", "string"],"default": null},
+    {"name":"reviewerLanguage","type":["null", "string"],"default": null}
+   ]
+
+},
+
+{"namespace":"com.steplabs.kafkaproducer.avro",
+  "type":"record",
+  "name":"Device",
+  "fields":[
+    {"name":"manufacturer","type":["null", "string"],"default": null},
+    {"name":"productName","type":["null", "string"],"default": null},
+    {"name":"ramMb","type":["null", "long"],"default": null}
+   ]
+
+},
+
+{"namespace":"com.steplabs.kafkaproducer.avro",
+   "type": "record",
+   "name": "Review",
+   "fields":[
+   {"name":"reviewId","type":"string"},
+   {"name":"comments","type":["string","null"],"default":null},
+   {"name":"starRating","type":["null", "long"],"default": null},
+   {"name":"modified","type":["null", "long"],"default": null},
+   {"name":"user","type":"com.steplabs.kafkaproducer.avro.User"},
+   {"name":"device","type":"com.steplabs.kafkaproducer.avro.Device"}]
+
+}
+]

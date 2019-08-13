@@ -1,0 +1,10 @@
+/Users/shreyashn/Documents/kafkaproducer/src/main/java/com/steplabs/kafkaproducer/client/PlayStoreRestClient.java
+/Users/shreyashn/Documents/kafkaproducer/target/generated-sources/avro/com/steplabs/kafkaproducer/avro/Review.java
+/Users/shreyashn/Documents/kafkaproducer/src/main/java/com/steplabs/kafkaproducer/model/ReviewApiResponse.java
+/Users/shreyashn/Documents/kafkaproducer/target/generated-sources/avro/com/steplabs/kafkaproducer/avro/User.java
+/Users/shreyashn/Documents/kafkaproducer/src/main/java/com/steplabs/kafkaproducer/AppConfig.java
+/Users/shreyashn/Documents/kafkaproducer/src/main/java/com/steplabs/kafkaproducer/runnable/ReviewsFetcherThread.java
+/Users/shreyashn/Documents/kafkaproducer/target/generated-sources/avro/com/steplabs/kafkaproducer/avro/Device.java
+/Users/shreyashn/Documents/kafkaproducer/src/main/java/com/steplabs/kafkaproducer/runnable/ReviewsProducerThread.java
+/Users/shreyashn/Documents/kafkaproducer/src/main/java/com/steplabs/kafkaproducer/ReviewsProducerMain.java
+/Users/shreyashn/Documents/kafkaproducer/src/main/java/com/steplabs/kafkaproducer/utils/PlayStorePublisherUtils.java
