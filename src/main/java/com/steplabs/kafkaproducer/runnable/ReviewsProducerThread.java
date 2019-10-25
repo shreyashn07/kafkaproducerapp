@@ -4,9 +4,7 @@ import com.steplabs.kafkaproducer.AppConfig;
 import com.steplabs.kafkaproducer.avro.Review;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.LongSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +35,11 @@ public class ReviewsProducerThread implements Runnable {
 
     public KafkaProducer<Long, Review> createKafkaProducer(AppConfig appConfig) {
         Properties properties = new Properties();
+        properties.put("ssl.endpoint.identification.algorithm",appConfig.getSslEndpointIdentificationAlgorithm());
+        properties.put("security.protocol",appConfig.getSecurityProtocol());
+        properties.put("sasl.mechanism",appConfig.getSaslMechanism());
+        properties.put("sasl.jaas.config",appConfig.getSaslJaasConfig());
+        properties.put("schema.registry.basic.auth.user.info","F5DXHWW6RA54EFXI:efGvDsZLSkXquhH00e4qtaWRG4Eikh/YV5Ix/xZPmQlJNvn8TgFql42RuE44h9mY");
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, appConfig.getBootstrapServers());
         properties.put(ProducerConfig.ACKS_CONFIG, "all");
         properties.put(ProducerConfig.RETRIES_CONFIG, Integer.MAX_VALUE);
@@ -61,7 +64,19 @@ public class ReviewsProducerThread implements Runnable {
                 } else {
                     reviewCount += 1;
                     log.info("Sending review " + reviewCount + ": " + review);
-                    kafkaProducer.send(new ProducerRecord<>(targetTopic, review));
+                    kafkaProducer.send(new ProducerRecord<>(targetTopic, review), new Callback() {
+                        @Override
+                        public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                            if(e!=null)
+                            {
+                                e.printStackTrace();
+                            }else{
+
+                                System.out.printf("Produced record to topic %s partition [%d] @ offset %d%n", recordMetadata.topic(), recordMetadata.partition(), recordMetadata.offset());
+                            }
+
+                        }
+                    });
                     // sleeping to slow down the pace a bit
                     Thread.sleep(appConfig.getProducerFrequencyMs());
                 }

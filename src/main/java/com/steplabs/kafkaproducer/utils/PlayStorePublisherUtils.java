@@ -25,7 +25,7 @@ public class PlayStorePublisherUtils {
 
     /** Global instance of the HTTP transport. */
     private static HttpTransport HTTP_TRANSPORT;
-    private static final String SRC_RESOURCES_KEY_P12 = "/Users/shreyashn/Documents/medium-blog-kafka-udemy-master/udemy-reviews-producer/src/main/resources/key.p12";
+    private static final String SRC_RESOURCES_KEY_P12 = "/Users/shreyashn/Documents/kafkaproducer/src/main/resources/key.p12";
 
     private static Credential authorizeWithServiceAccount(String serviceAccountEmail)
             throws GeneralSecurityException, IOException {

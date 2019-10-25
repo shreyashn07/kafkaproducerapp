@@ -50,7 +50,7 @@ public class PlayStoreRestClient {
         Map<String,Object> parameters = new HashMap<>();
         parameters.put("access_token",token);
         //parameters.put("token","1");
-        parameters.put("maxResults","1");
+        parameters.put("maxResults","100");
         try{
             HttpResponse<JsonNode> jsonResponse= Unirest.get("https://www.googleapis.com/androidpublisher/v3/applications/com.fourhorsemen.musicvault/reviews")
                     .queryString(parameters)
@@ -89,7 +89,7 @@ public class PlayStoreRestClient {
         Map<String,Object> parameters = new HashMap<>();
         parameters.put("access_token",token);
         parameters.put("token",nextPageToken);
-        parameters.put("maxResults","50");
+        parameters.put("maxResults","100");
         try{
             jsonResponse= Unirest.get("https://www.googleapis.com/androidpublisher/v3/applications/com.fourhorsemen.musicvault/reviews")
                     .queryString(parameters)

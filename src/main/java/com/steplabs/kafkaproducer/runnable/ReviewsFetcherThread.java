@@ -9,6 +9,7 @@ import com.steplabs.kafkaproducer.avro.Device;
 import com.steplabs.kafkaproducer.avro.Review;
 import com.steplabs.kafkaproducer.avro.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CountDownLatch;
@@ -36,10 +37,10 @@ public class ReviewsFetcherThread implements Runnable{
         try{
             Boolean keepOnRunning= true;
             while(keepOnRunning){
-                List<Review> reviews;
+                List<Review> reviews = new ArrayList<>();
 
                 try {
-                    reviews = playStoreClient.getNextReviews();
+                    reviews.addAll(playStoreClient.getNextReviews());
                     log.info("Fetched " + reviews.size() + " reviews");
                     if (reviews.size() == 0) {
                         keepOnRunning = false;
@@ -49,6 +50,7 @@ public class ReviewsFetcherThread implements Runnable{
                         for (Review review : reviews) {
                             reviewsQueue.put(review);
                         }
+
                     }
                 }catch (Exception e) {
                     e.printStackTrace();
@@ -68,6 +70,7 @@ public class ReviewsFetcherThread implements Runnable{
     }
 
     private void close(){
+        log.info("Queue size after insertion:" + reviewsQueue.size());
         log.info("closing");
         playStoreClient.close();
         latch.countDown();

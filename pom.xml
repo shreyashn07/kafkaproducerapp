@@ -121,10 +121,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <finalName>uber-${project.artifactId}-${project.version}</finalName>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
                     <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>com.github.simplesteph.kafka.producer.udemy.ReviewsProducerMain</mainClass>
+                            <mainClass>com.steplabs.kafkaproducer.ReviewsProducerMain</mainClass>
                         </transformer>
                     </transformers>
                 </configuration>
