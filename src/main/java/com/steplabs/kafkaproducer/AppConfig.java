@@ -11,6 +11,15 @@ public class AppConfig {
     private final String packageName;
     private final String serviceEmail;
     private final String appName;
+    private final Integer retryBackoff;
+    private final String securityProtocol;
+    private final String sslEndpointIdentificationAlgorithm;
+    private final String saslMechanism;
+    private final String saslJaasConfig;
+
+
+
+
 
 
     public AppConfig(Config config) {
@@ -22,6 +31,11 @@ public class AppConfig {
         this.packageName=config.getString("app.package.name");
         this.serviceEmail=config.getString("app.service.account.email");
         this.appName=config.getString("app.app.name");
+        this.retryBackoff=config.getInt("kafka.retry.backoff.ms");
+        this.securityProtocol=config.getString("kafka.security.protocol");
+        this.sslEndpointIdentificationAlgorithm=config.getString("kafka.ssl.endpoint.identification.algorithm");
+        this.saslMechanism=config.getString("kafka.sasl.mechanism");
+        this.saslJaasConfig=config.getString("kafka.sasl.jaas.config");
 
     }
 
@@ -52,6 +66,15 @@ public class AppConfig {
 
     public String getAppName(){return appName;}
 
+    public String getSecurityProtocol(){return securityProtocol;}
+
+    public String getSslEndpointIdentificationAlgorithm(){return sslEndpointIdentificationAlgorithm;}
+
+    public String getSaslMechanism(){return saslMechanism;}
+
+    public String getSaslJaasConfig(){return saslJaasConfig;}
+
+    public Integer getRetryBackoff(){return retryBackoff;}
+
 
 }
-

@@ -4,9 +4,7 @@ import com.steplabs.kafkaproducer.AppConfig;
 import com.steplabs.kafkaproducer.avro.Review;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.LongSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,18 +34,21 @@ public class ReviewsProducerThread implements Runnable {
     }
 
     public KafkaProducer<Long, Review> createKafkaProducer(AppConfig appConfig) {
-        Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, appConfig.getBootstrapServers());
-        properties.put(ProducerConfig.ACKS_CONFIG, "all");
-        properties.put(ProducerConfig.RETRIES_CONFIG, Integer.MAX_VALUE);
-        properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 5);
-        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
-        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");
-        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class.getName());
-        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
-        properties.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, appConfig.getSchemaRegistryUrl());
+        Properties props = new Properties();
+        String fin="org.apache.kafka.common.security.plain.PlainLoginModule required username='2WZINDSMSH4GYR6Q' password='9w6mBQH8G5qKC6bPetBQZzWv8a8AtzEmGp8lXwrVUqCOVb76iihU//TFsOiyA0KB';";
+        props.put("bootstrap.servers","pkc-4nym6.us-east-1.aws.confluent.cloud:9092");
+        props.put("ssl.endpoint.identification.algorithm","https");
+        props.put("security.protocol","SASL_SSL");
+        props.put("sasl.mechanism","PLAIN");
+        props.put("sasl.jaas.config", fin);
+        props.put("basic.auth.credentials.source","USER_INFO");
+        props.put("schema.registry.basic.auth.user.info","F5DXHWW6RA54EFXI:efGvDsZLSkXquhH00e4qtaWRG4Eikh/YV5Ix/xZPmQlJNvn8TgFql42RuE44h9mY");
+        props.put("schema.registry.url","https://psrc-lo3do.us-east-2.aws.confluent.cloud");
+        props.put(ProducerConfig.ACKS_CONFIG, "all");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class.getName());
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
 
-        return new KafkaProducer<>(properties);
+        return new KafkaProducer<>(props);
     }
 
     @Override
@@ -61,7 +62,16 @@ public class ReviewsProducerThread implements Runnable {
                 } else {
                     reviewCount += 1;
                     log.info("Sending review " + reviewCount + ": " + review);
-                    kafkaProducer.send(new ProducerRecord<>(targetTopic, review));
+                    kafkaProducer.send(new ProducerRecord<>(targetTopic, review), (recordMetadata, e) -> {
+                        if(e!=null)
+                        {
+                            e.printStackTrace();
+                        }else{
+
+                            System.out.printf("Produced record to topic %s partition [%d] @ offset %d%n", recordMetadata.topic(), recordMetadata.partition(), recordMetadata.offset());
+                        }
+
+                    });
                     // sleeping to slow down the pace a bit
                     Thread.sleep(appConfig.getProducerFrequencyMs());
                 }
