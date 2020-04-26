@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74ee6132-c938-4601-acc1-7ed877f32280" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/steplabs/kafkaproducer/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/steplabs/kafkaproducer/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/steplabs/kafkaproducer/runnable/ProducerAvroExample.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/steplabs/kafkaproducer/runnable/ReviewsProducerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/steplabs/kafkaproducer/runnable/ReviewsProducerThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.conf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.conf" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/steplabs/kafkaproducer/AppConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/steplabs/kafkaproducer/AppConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/steplabs/kafkaproducer/runnable/ReviewsProducerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/steplabs/kafkaproducer/runnable/ReviewsProducerThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log4j.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,7 +91,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -176,11 +171,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/steplabs/kafkaproducer/runnable/ReviewsProducerThread.java</url>
           <line>81</line>
           <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/steplabs/kafkaproducer/runnable/ProducerAvroExample.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/steplabs/kafkaproducer/client/PlayStoreRestClient.java</url>

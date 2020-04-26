@@ -35,15 +35,15 @@ public class ReviewsProducerThread implements Runnable {
 
     public KafkaProducer<Long, Review> createKafkaProducer(AppConfig appConfig) {
         Properties props = new Properties();
-        String fin="org.apache.kafka.common.security.plain.PlainLoginModule required username='2WZINDSMSH4GYR6Q' password='9w6mBQH8G5qKC6bPetBQZzWv8a8AtzEmGp8lXwrVUqCOVb76iihU//TFsOiyA0KB';";
-        props.put("bootstrap.servers","pkc-4nym6.us-east-1.aws.confluent.cloud:9092");
+        String fin="org.apache.kafka.common.security.plain.PlainLoginModule required username='xxx' password='xxx';";
+        props.put("bootstrap.servers","xxx.aws.confluent.cloud:9092");
         props.put("ssl.endpoint.identification.algorithm","https");
         props.put("security.protocol","SASL_SSL");
         props.put("sasl.mechanism","PLAIN");
         props.put("sasl.jaas.config", fin);
         props.put("basic.auth.credentials.source","USER_INFO");
-        props.put("schema.registry.basic.auth.user.info","F5DXHWW6RA54EFXI:efGvDsZLSkXquhH00e4qtaWRG4Eikh/YV5Ix/xZPmQlJNvn8TgFql42RuE44h9mY");
-        props.put("schema.registry.url","https://psrc-lo3do.us-east-2.aws.confluent.cloud");
+        props.put("schema.registry.basic.auth.user.info","xxx");
+        props.put("schema.registry.url","https://xxx.aws.confluent.cloud");
         props.put(ProducerConfig.ACKS_CONFIG, "all");
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
